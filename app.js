@@ -3,7 +3,9 @@ const express = require('express')
 const app = express()
 const port = 3000
 const exphbs = require('express-handlebars')
+const routes = require('./routes')
 const methodOverride = require('method-override')
+require('./config/mongoose')
 
 // set hbs 預設佈局main
 app.engine('hbs', exphbs({ defaultLayout: 'main',
@@ -17,6 +19,10 @@ app.use(express.static('public'))
 
 // body-parser
 app.use(express.urlencoded({ extended: true }))
+
+
+// routes
+app.use(routes)
 
 
 // methodOverride

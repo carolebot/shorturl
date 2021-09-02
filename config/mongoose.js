@@ -1,5 +1,3 @@
-mongoose.js
-
 const mongoose = require('mongoose')
 
 // mongodb and mongoose ///////////////////

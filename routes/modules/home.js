@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const Shorturl = require('../../models/shorturl')
 
 // browse all restaurants
 router.get('/', (req, res) => {
-  Expense.find()
+  Shorturl.find()
     .lean()
     .then(urls => {
       urls.forEach(url => {
@@ -15,12 +16,12 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   console.log(req.body)
-  Expense.find()
+  Shorturl.find()
     .lean()
-    .then(urls => {
-      urls.forEach(url => {
+    .then(shorturl => {
+      shorturls.forEach(shorturl => {
       })
-      res.render('index', { url })
+      res.render('index', { shorturl })
     })
     .catch(err => console.error(err))
 })
