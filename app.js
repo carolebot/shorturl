@@ -6,7 +6,8 @@ const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 
 // set hbs 預設佈局main
-app.engine('hbs', exphbs({ defaultLayout: 'main' }))
+app.engine('hbs', exphbs({ defaultLayout: 'main',
+extname: '.hbs', }))
 app.set('view engine', 'hbs')
 
 
