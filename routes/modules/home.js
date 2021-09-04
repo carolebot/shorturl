@@ -38,7 +38,7 @@ router.get('/:shorturl', async (req, res) => {
     console.log(rawurl[0].shorturl)
     return res.render('index', {rawurl})
   }
-     res.redirect(200, `${rawurl}`)
+    res.redirect(`${rawurl[0].rawurl}`)
   }
   
   catch(err) { 
