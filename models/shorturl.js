@@ -3,10 +3,12 @@ const Schema = mongoose.Schema
 const shorturlSchema = new Schema({
   shorturl: {
     type: String,
+    unique: true,
     required: true
   },
   rawurl: {
     type: String,
+    unique: true,
     required: true
   }
 })

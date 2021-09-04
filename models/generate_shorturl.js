@@ -16,11 +16,11 @@ function generateShorturl(shorturls) {
 
   // 產生密碼
   let pwdlength = 5
-  let url = ''
+  let shorturl = ''
   for (let i = 0; i < pwdlength; i++) {
-    url += random(collection)
+    shorturl += random(collection)
   } 
-  return (url)
+  return (shorturl)
 }
 
 module.exports = generateShorturl
