@@ -2,6 +2,14 @@
   <h1>URL Shortener</h1>
   <a href="/"><i class="fas fa-link fa-10x" style="color:#80D3F2"></i></a>
 
+  {{!-- 第一次到首頁 --}}
+  {{#unless shorturl}}
+  <form method="POST" action="/" class="text-center">
+    <input type="text" name="rawurl" value="{{rawurl}}" class="form-control my-3" placeholder="Input URL here" required>
+    <button onclick="myFunction()" type="submit" class="btn btn-outline-info my-3">Shorten</button>
+  </form>
+  {{/unless}}
+
   {{#if rawurl}}
   <div class="alert text-center" role="alert">
     <h2 class="mr-2 align-left">Success! Please use this link:</h2>
@@ -22,11 +30,5 @@
 
   {{/unless}}
 
-  {{!-- 第一次到首頁 --}}
-  {{#unless shorturl}}
-  <form method="POST" action="/" class="text-center">
-    <input type="text" name="rawurl" value="{{rawurl}}" class="form-control my-3" placeholder="Input URL here">
-    <button onclick="myFunction()" type="submit" class="btn btn-outline-info my-3">Shorten</button>
-  </form>
-  {{/unless}}
+
 </div>
