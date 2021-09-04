@@ -17,30 +17,33 @@ router.post('/', async (req, res) => {
     if (checkurls.length) {
       console.log(checkurls[0].shorturl)
       return res.render('index', {
-        result: true,
-        shorturl: `${website}${checkurls[0].shorturl}`
-        
+        result: false,
+        shorturl: `${website}${checkurls[0].shorturl}`,
       })
     }
     const shorturl = generateShorturl()
     Shorturl.create({ shorturl, rawurl })
-    res.render('index', { website, shorturl })
+    res.render('index', { website, shorturl, rawurl })
 
   } catch (err) {
     console.log(err)
   }
 })
 
-// router.get('/:shorturl', (req, res) => {
-//   const shorturl = req.params.shorturl
-//   const rawurl = Shorturl.find({shorturl})
-//     .lean()
-//     .then((url) => {
-//       console.log(rawurl)
-//       console.log(`${website}${rawurl}`)
-//      res.redirect(200, `${website}${rawurl}`)
-//     })
-//     .catch(err => console.error(err))
-// })
+router.get('/:shorturl', async (req, res) => {
+  try {
+  const shorturl = req.params.shorturl
+  const rawurl = await Shorturl.find({shorturl}).lean()
+  if (!rawurl.length) {
+    console.log(rawurl[0].shorturl)
+    return res.render('index', {rawurl})
+  }
+     res.redirect(200, `${rawurl}`)
+  }
+  
+  catch(err) { 
+    console.error(err)
+  }
+})
 
 module.exports = router
