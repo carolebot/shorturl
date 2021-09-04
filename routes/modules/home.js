@@ -2,11 +2,10 @@ const express = require('express')
 const router = express.Router()
 const Shorturl = require('../../models/shorturl')
 const generateShorturl = require('../../models/generate_shorturl')
-const website = 'http://localhost:3000/'
+const website = process.env.MONGODB_URI || 'mongodb://localhost/shorturl'
 
 // browse all restaurants
 router.get('/', (req, res) => {
-  console.log(req.protocol, req.get('host'))
   res.render('index')
 })
 
@@ -15,7 +14,6 @@ router.post('/', async (req, res) => {
     const { rawurl } = req.body
     const checkurls = await Shorturl.find({ rawurl }).lean()
     if (checkurls.length) {
-      console.log(checkurls[0].shorturl)
       return res.render('index', {
         result: false,
         shorturl: `${website}${checkurls[0].shorturl}`,
@@ -35,7 +33,6 @@ router.get('/:shorturl', async (req, res) => {
   const shorturl = req.params.shorturl
   const rawurl = await Shorturl.find({shorturl}).lean()
   if (!rawurl.length) {
-    console.log(rawurl[0].shorturl)
     return res.render('index', {rawurl})
   }
     res.redirect(`${rawurl[0].rawurl}`)
