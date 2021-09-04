@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Shorturl = require('../../models/shorturl')
 const generateShorturl = require('../../models/generate_shorturl')
-const website = process.env.MONGODB_URI || 'mongodb://localhost/shorturl'
+const website = 'https://nameless-badlands-14698.herokuapp.com/'
 
 // browse all restaurants
 router.get('/', (req, res) => {
