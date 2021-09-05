@@ -4,6 +4,7 @@ const Shorturl = require('../../models/shorturl')
 const generateShorturl = require('../../models/generate_shorturl')
 const website = 'https://nameless-badlands-14698.herokuapp.com/'
 
+
 // browse all restaurants
 router.get('/', (req, res) => {
   res.render('index')
