@@ -20,7 +20,14 @@ router.post('/', async (req, res) => {
         shorturl: `${website}${checkurls[0].shorturl}`,
       })
     }
-    const shorturl = generateShorturl()
+    
+    const shorturl = ''
+    do {
+      shorturl = generateShorturl()
+      const checkshorturls = await Shorturl.find({ shorturl }).lean()
+    }
+    while (checkshorturls.length)
+    
     Shorturl.create({ shorturl, rawurl })
     res.render('index', { website, shorturl, rawurl })
 
@@ -31,15 +38,15 @@ router.post('/', async (req, res) => {
 
 router.get('/:shorturl', async (req, res) => {
   try {
-  const shorturl = req.params.shorturl
-  const rawurl = await Shorturl.find({shorturl}).lean()
-  if (!rawurl.length) {
-    return res.render('index', {rawurl})
-  }
+    const shorturl = req.params.shorturl
+    const rawurl = await Shorturl.find({ shorturl }).lean()
+    if (!rawurl.length) {
+      return res.render('index', { rawurl })
+    }
     res.redirect(`${rawurl[0].rawurl}`)
   }
-  
-  catch(err) { 
+
+  catch (err) {
     console.error(err)
   }
 })
