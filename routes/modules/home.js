@@ -13,21 +13,20 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
   try {
     const { rawurl } = req.body
-    const checkurls = await Shorturl.find({ rawurl }).lean()
-    if (checkurls.length) {
+    const checkUrls = await Shorturl.find({ rawurl }).lean()
+    if (checkUrls.length) {
       return res.render('index', {
         result: false,
-        shorturl: `${website}${checkurls[0].shorturl}`,
+        shorturl: `${website}${checkUrls[0].shorturl}`,
       })
     }
     
-    let shorturl = ''
-    const checkshorturls = await Shorturl.find({ shorturl }).lean()
-    do {
+    let shorturl = generateShorturl()
+    const checkShortUrls = await Shorturl.find({ shorturl }).lean()
+    while (checkShortUrls.length) {
       shorturl = generateShorturl()
+      checkShortUrls = await Shorturl.find({ shorturl }).lean()
     }
-    while (checkshorturls.length)
-    
     Shorturl.create({ shorturl, rawurl })
     res.render('index', { website, shorturl, rawurl })
 
