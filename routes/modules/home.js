@@ -21,10 +21,10 @@ router.post('/', async (req, res) => {
       })
     }
     
-    const shorturl = ''
+    let shorturl = ''
+    const checkshorturls = await Shorturl.find({ shorturl }).lean()
     do {
       shorturl = generateShorturl()
-      const checkshorturls = await Shorturl.find({ shorturl }).lean()
     }
     while (checkshorturls.length)
     
