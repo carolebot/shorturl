@@ -1,3 +1,4 @@
+'use strict'
 const express = require('express')
 const router = express.Router()
 const Shorturl = require('../../models/shorturl')
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
     }
     
     let shorturl = generateShorturl()
-    const checkShortUrls = await Shorturl.find({ shorturl }).lean()
+    let checkShortUrls = await Shorturl.find({ shorturl }).lean()
     while (checkShortUrls.length) {
       shorturl = generateShorturl()
       checkShortUrls = await Shorturl.find({ shorturl }).lean()
